@@ -25,6 +25,15 @@ def print_operators(node)
   end
 end
 
+def count_non_operators(node)
+  return if node == nil
+    count_non_operators(node.left)
+    unless "+-*%/".include? node.value
+    print node.value + " "
+  end
+  count_non_operators(node.right)
+end
+
 root = TreeNode.new("-")
 root.left = TreeNode.new("+")
 root.right = TreeNode.new("10")
@@ -35,7 +44,9 @@ print_infix(root)
 puts
 print_operators(root)
 puts
-puts
+count_non_operators(root)
+puts puts
+
 root2 = TreeNode.new("+")
 root2.left = TreeNode.new("*")
 root2.right = TreeNode.new("2")
@@ -45,7 +56,8 @@ root2.left.left = TreeNode.new("3")
 print_infix(root2)
 puts
 print_operators(root2)
-
+puts
+count_non_operators(root2)
 puts
 puts
 root3 = TreeNode.new("-")
@@ -58,6 +70,9 @@ root3.right = TreeNode.new("%")
 root3.right.left = TreeNode.new("10")
 root3.right.right = TreeNode.new("5")
 
+
+print_infix(root3)
+puts
 print_operators(root3)
 puts
-print_infix(root3)
+count_non_operators(root3)
